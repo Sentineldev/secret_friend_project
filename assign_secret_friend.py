@@ -22,12 +22,14 @@ def sent_email(email_receiver,content):
     msg.set_content(f"Tu amigo secreto es {content}")
     msg.add_alternative(f"""\n\n
     
-    
 
-    <body style=" border-radius:0.4rem; text-align:center; background-color:black; padding:1rem;">
-
-        <h1 text-align:center; style="color:white;">Tu amigo secreto es</h1>
-        <span text-align:center; style="font-size:3.2rem; font-family: 'Ubuntu'; color: white ;  " > {content} </span>
+    <body>
+        <div style="background-color:rgb(17,17,19); border-radius:0.2rem; padding: 1rem; text-align:center; font-family:monospace;" class="message-box">
+            <header style="font-size: 2rem; color:rgb(222,216,216); font-weight:bold; font-family: Arial, Helvetica, sans-serif;">Tu amigo secreto es</header>
+            <h1>
+                <span style="font-size:3.2rem; border-bottom:1px solid; color:rgb(60,255,0);">{content}</span>
+            </h1>
+        </div>
     </body>
 
     """,subtype="html")
@@ -56,9 +58,9 @@ def secret_friend(friends):
 
     #asigna un numero aleatorio al id de cada amigo.
     for friend in friends:
-        random_num = randint(0,len(friends)-1)
+        random_num = randint(0,100)
         while (random_num in picked_numbers):
-            random_num = randint(0,len(friends)-1)
+            random_num = randint(0,100)
 
         picked_numbers[random_num] = friend['nombre']
         friend['id'] = random_num
@@ -92,7 +94,7 @@ def secret_friend(friends):
 friends = [
     {"nombre":"Jysus","id":0,"email":"jesusfiguera20@gmail.com"},
     {"nombre":"Joel","id":0,"email":"jesusfiguera2310@gmail.com"},
-    {"nombre":"Jade","id":0,"email":"figueraj196@gmail.com"},
+    {"nombre":"Jade","id":0,"email":"figueraj196@gmail.com"}
 ]
 
 
@@ -100,7 +102,7 @@ secret_friends  = secret_friend(friends)
 
 
 for secret in secret_friends:
-    #print(f"{secret[0]['nombre']} le regala a {secret[1]['nombre']}")
+    print(f"{secret[0]['nombre']} le regala a {secret[1]['nombre']}")
     sent_email(secret[0]['email'],secret[1]['nombre'])
 
 
